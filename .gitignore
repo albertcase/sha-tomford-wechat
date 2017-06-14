@@ -1,0 +1,8 @@
+.DS_Store
+.vagrant
+/app/cache/
+/app/logs/
+/web/upload/
+/var/cache/
+/var/logs/
+/var/sessions/
