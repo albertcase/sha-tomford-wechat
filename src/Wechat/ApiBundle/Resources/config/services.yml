@@ -1,0 +1,225 @@
+services:
+#    wechat_api.example:
+#        class: Wechat\ApiBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
+        my.Wechat:
+          class: Wechat\ApiBundle\Modals\classes\Wechat
+          arguments: [@service_container]
+
+        vendor.MysqliDb:
+          class: MysqliDb
+          arguments: [%database_host%, %database_user%, %database_password%, %database_name%]
+
+        vendor.LMysqliDb:
+          class: MysqliDb
+          arguments: [p:%database_host%, %database_user%, %database_password%, %database_name%]
+
+        my.dataSql:
+          class: Wechat\ApiBundle\Modals\Database\dataSql
+          arguments: [@service_container]
+
+        my.LdataSql:
+          class: Wechat\ApiBundle\Modals\Database\LdataSql
+          arguments: [@service_container]
+
+        php.redis:
+          class: Redis
+          calls:
+            - [connect, [%redis_host%, %redis_port%]]
+
+        my.RedisLogic:
+          class: Wechat\ApiBundle\Modals\Database\RedisLogic
+          arguments: [@service_container]
+
+        my.functions:
+          class: Wechat\ApiBundle\Modals\classes\functions
+          arguments: [@service_container]
+# form list
+        form.buttoninfo:
+          class: Wechat\ApiBundle\Forms\buttoninfo
+          scope: request
+          arguments: [@request, @service_container]
+
+        form.buttondel:
+          class: Wechat\ApiBundle\Forms\buttondel
+          scope: request
+          arguments: [@request, @service_container]
+
+        form.buttonaddsub:
+          class: Wechat\ApiBundle\Forms\buttonaddsub
+          scope: request
+          arguments: [@request, @service_container]
+
+        form.buttonaddm:
+          class: Wechat\ApiBundle\Forms\buttonaddm
+          scope: request
+          arguments: [@request, @service_container]
+
+        form.buttonupdate:
+          class: Wechat\ApiBundle\Forms\buttonupdate
+          scope: request
+          arguments: [@request, @service_container]
+# keyword api
+        form.keywordadd:
+          class: Wechat\ApiBundle\Forms\keywordadd
+          scope: request
+          arguments: [@request, @service_container]
+
+        form.keyworddel:
+          class: Wechat\ApiBundle\Forms\keyworddel
+          scope: request
+          arguments: [@request, @service_container]
+
+        form.keywordinfo:
+          class: Wechat\ApiBundle\Forms\keywordinfo
+          scope: request
+          arguments: [@request, @service_container]
+
+        form.keywordupdate:
+          class: Wechat\ApiBundle\Forms\keywordupdate
+          scope: request
+          arguments: [@request, @service_container]
+# autoreply
+        form.autoreply:
+          class: Wechat\ApiBundle\Forms\autoreply
+          scope: request
+          arguments: [@request, @service_container]
+
+        form.autoreplyload:
+          class: Wechat\ApiBundle\Forms\autoreplyload
+          scope: request
+          arguments: [@request, @service_container]
+
+        form.autoreplydel:
+          class: Wechat\ApiBundle\Forms\autoreplydel
+          scope: request
+          arguments: [@request, @service_container]
+# group news
+        form.groupnewssend:
+          class: Wechat\ApiBundle\Forms\groupnewssend
+          scope: request
+          arguments: [@request, @service_container]
+
+        form.uploadstore:
+            class: Wechat\ApiBundle\Forms\uploadstore
+            scope: request
+            arguments: [@request, @service_container]
+
+        form.newmenuranking:
+            class: Wechat\ApiBundle\Forms\newmenuranking
+            scope: request
+            arguments: [@request, @service_container]
+# jssdk
+        form.jssdkbuild:
+            class: Wechat\ApiBundle\Forms\buildjssdk
+            scope: request
+            arguments: [@request, @service_container]
+
+        form.jssdklist:
+            class: Wechat\ApiBundle\Forms\jssdklist
+            scope: request
+            arguments: [@request, @service_container]
+
+        form.jssdkinfo:
+            class: Wechat\ApiBundle\Forms\jssdkinfo
+            scope: request
+            arguments: [@request, @service_container]
+
+        form.jssdkupdate:
+            class: Wechat\ApiBundle\Forms\jssdkupdate
+            scope: request
+            arguments: [@request, @service_container]
+
+        form.jssdkdelete:
+            class: Wechat\ApiBundle\Forms\jssdkdel
+            scope: request
+            arguments: [@request, @service_container]
+
+# qrcode start
+        form.qrcodeadd:
+            class: Wechat\ApiBundle\Forms\qrcodeadd
+            scope: request
+            arguments: [@request, @service_container]
+
+        form.qrcodelist:
+            class: Wechat\ApiBundle\Forms\qrcodelist
+            scope: request
+            arguments: [@request, @service_container]
+
+        form.qrcodeinfo:
+            class: Wechat\ApiBundle\Forms\qrcodeinfo
+            scope: request
+            arguments: [@request, @service_container]
+
+        form.qrcodeupdate:
+            class: Wechat\ApiBundle\Forms\qrcodeupdate
+            scope: request
+            arguments: [@request, @service_container]
+
+        form.qrcodedelete:
+            class: Wechat\ApiBundle\Forms\qrcodedel
+            scope: request
+            arguments: [@request, @service_container]
+# qrcode end
+# oauth start
+        form.oauthadd:
+            class: Wechat\ApiBundle\Forms\oauthadd
+            scope: request
+            arguments: [@request, @service_container]
+
+        form.oauthlist:
+            class: Wechat\ApiBundle\Forms\oauthlist
+            scope: request
+            arguments: [@request, @service_container]
+
+        form.oauthdelete:
+            class: Wechat\ApiBundle\Forms\oauthdel
+            scope: request
+            arguments: [@request, @service_container]
+
+        form.oauthupdate:
+            class: Wechat\ApiBundle\Forms\oauthupdate
+            scope: request
+            arguments: [@request, @service_container]
+
+        form.oauthinfo:
+            class: Wechat\ApiBundle\Forms\oauthinfo
+            scope: request
+            arguments: [@request, @service_container]
+# oauth end
+# stores
+        form.storesadd:
+            class: Wechat\ApiBundle\Forms\storesadd
+            scope: request
+            arguments: [@request, @service_container]
+
+        form.storeslist:
+            class: Wechat\ApiBundle\Forms\storeslist
+            scope: request
+            arguments: [@request, @service_container]
+
+        form.storesdelete:
+            class: Wechat\ApiBundle\Forms\storesdel
+            scope: request
+            arguments: [@request, @service_container]
+
+        form.storesupdate:
+            class: Wechat\ApiBundle\Forms\storesupdate
+            scope: request
+            arguments: [@request, @service_container]
+
+        form.storesinfo:
+            class: Wechat\ApiBundle\Forms\storesinfo
+            scope: request
+            arguments: [@request, @service_container]
+
+# wechatuser
+        form.wechatuserstatus:
+            class: Wechat\ApiBundle\Forms\wechatuserstatus
+            scope: request
+            arguments: [@request, @service_container]
+# wechatuserend
+# stores end
+# script
+        script.customs:
+          class: Wechat\ApiBundle\Modals\CustomMsg\customsResponse
