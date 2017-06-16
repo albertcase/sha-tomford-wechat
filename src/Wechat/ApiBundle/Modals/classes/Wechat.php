@@ -6,13 +6,15 @@ use Wechat\ApiBundle\Modals\classes\WechatResponse;
 
 class Wechat{
 
+  private $_container;
   private $_urls;
   private $_token = null;
   private $_appid = null;
   private $_secret = null;
 
-  public function __construct($token, $appId, $appSecret){
+  public function __construct($token, $appId, $appSecret, $container){
     $this->setUrls();
+    $this->_container = $container;
     $this->_token = $token;
     $this->_appid = $appId;
     $this->_secret = $appSecret;

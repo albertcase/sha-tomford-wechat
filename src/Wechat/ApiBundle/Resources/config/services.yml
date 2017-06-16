@@ -4,7 +4,7 @@ services:
 #        arguments: [@service_id, "plain_value", %parameter%]
         my.Wechat:
           class: Wechat\ApiBundle\Modals\classes\Wechat
-          arguments: [%wechat_token%, %wechat_appid%, %wechat_appsecret%]
+          arguments: [%wechat_token%, %wechat_appid%, %wechat_appsecret%, @service_container]
 
         vendor.MysqliDb:
           class: MysqliDb
