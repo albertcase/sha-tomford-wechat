@@ -20,7 +20,7 @@ class DefaultController extends Controller
       if(isset($_GET["echostr"])){
         return new Response($wechatObj->valid($_GET["echostr"]));
       }
-      $postStr = isset($GLOBALS["HTTP_RAW_POST_DATA"])?$GLOBALS["HTTP_RAW_POST_DATA"]:'';
+      $postStr = file_get_contents("php://input") ? file_get_contents("php://input") :'';
       $respose = new Response($wechatObj->responseMsg($postStr));
       return $respose->send();
     }
