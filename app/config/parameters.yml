@@ -13,17 +13,19 @@ parameters:
     locale: en
     secret: d96c19363af6dad4bb028f47ddcf7d94fba67bc1
 
-    # redis
+# redis
     redis_host: 127.0.0.1
     redis_port: 6379
     redis_prostr: tomford:
 
-  # wechat config
-    wechat_Token:
-    wechat_AppID:
-    wechat_AppSecret:
+    # wechat config
+    wechat_token: same_wechat_samesamechina
+    wechat_appid: wx6a8d97667dd72747
+    wechat_appsecret: 3712922926656c44c6d00a5ef264308c
 
     bundles:
       - wechat_api
       - article
       - user
+
+    hostdomain: 127.0.0.1:8076

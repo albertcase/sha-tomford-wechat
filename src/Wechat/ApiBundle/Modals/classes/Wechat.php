@@ -6,18 +6,16 @@ use Wechat\ApiBundle\Modals\classes\WechatResponse;
 
 class Wechat{
 
-  private $_container;
   private $_urls;
-  private $_TOKEN = null;
+  private $_token = null;
   private $_appid = null;
   private $_secret = null;
 
-  public function __construct($container){
-    $this->_container = $container;
+  public function __construct($token, $appId, $appSecret){
     $this->setUrls();
-    $this->_TOKEN = $container->getParameter('wechat_Token');
-    $this->_appid = $container->getParameter('wechat_AppID');
-    $this->_secret = $container->getParameter('wechat_AppSecret');
+    $this->_token = $token;
+    $this->_appid = $appId;
+    $this->_secret = $appSecret;
   }
 
   public function valid($echoStr){
@@ -30,8 +28,7 @@ class Wechat{
     $signature = $_GET["signature"];
     $timestamp = $_GET["timestamp"];
     $nonce = $_GET["nonce"];
-    $token = $this->_TOKEN;
-    $tmpArr = array($token, $timestamp, $nonce);
+    $tmpArr = array($this->_token, $timestamp, $nonce);
     sort($tmpArr, SORT_STRING);
     $tmpStr = implode( $tmpArr );
     $tmpStr = sha1( $tmpStr );
