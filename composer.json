@@ -21,7 +21,8 @@
         "sensio/distribution-bundle": "~4.0",
         "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
         "incenteev/composer-parameter-handler": "~2.0",
-        "joshcam/mysqli-database-class": "^2.6"
+        "joshcam/mysqli-database-class": "^2.6",
+        "faisalman/simple-excel-php": "^0.3.15"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

@@ -214,6 +214,10 @@ wechat_stores_papi_add:
     path:     /wechat/stores/add
     defaults: { _controller: WechatApiBundle:Stores:add }
 
+wechat_stores_papi_import:
+    path:     /wechat/stores/import
+    defaults: { _controller: WechatApiBundle:Stores:import }
+
 wechat_stores_papi_list:
     path:     /wechat/stores/list
     defaults: { _controller: WechatApiBundle:Stores:list }

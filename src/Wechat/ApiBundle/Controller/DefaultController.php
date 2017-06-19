@@ -21,8 +21,9 @@ class DefaultController extends Controller
         return new Response($wechatObj->valid($_GET["echostr"]));
       }
       $postStr = file_get_contents("php://input") ? file_get_contents("php://input") :'';
-      $respose = new Response($wechatObj->responseMsg($postStr));
-      return $respose->send();
+      $response = new Response($wechatObj->responseMsg($postStr));
+      $response->headers->set('Content-Type', 'application/xml');
+      return $response;
     }
 
     public function uploadstoreAction()

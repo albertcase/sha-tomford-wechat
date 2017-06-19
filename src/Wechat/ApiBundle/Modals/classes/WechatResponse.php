@@ -167,7 +167,7 @@ class WechatResponse{
     if(is_array($rs) && count($rs)> 0 ){
       return $this->msgResponse($rs);
     }
-    return array();
+    return "";
   }
 
 /**

@@ -3,7 +3,6 @@
 namespace Wechat\ApiBundle\Modals\classes;
 
 class MyPHPExcel{
-
   public function output($data, $top , $name){
     $PHPExcel = new \PHPExcel();
     $PHPExcel->getProperties()->setTitle("Office 2007 XLSX Document")
