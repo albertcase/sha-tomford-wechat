@@ -62,14 +62,6 @@ class StoresController extends Controller
       $newName = 'upload/files/storeexcel.' . $file_type;
       $fs->rename($_FILES ['storesexcel']['tmp_name'], $newName, true);
 
-      $excel = new SimpleExcel('CSV');
-      $excel->parser->loadFile($newName);
-
-      echo $excel->parser->getCell(1, 1);
-
-//      $excel->convertTo('JSON');
-//      $excel->writer->addRow(array('add', 'another', 'row'));
-//      $excel->writer->saveFile('example');
       echo 'upload ok';exit;
   }
 

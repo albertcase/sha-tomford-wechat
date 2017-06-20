@@ -21,7 +21,7 @@
      <ul class="nav nav-tabs navselect" style="margin-top:20px" id="storesnav">
          <li class="active"><a href="#" active="storeslist" class="message">Store List</a></li>
          <li class=""><a href="#" active="addstores" class="message">Add Store</a></li>
-         <li class=""><a href="#" active="importstores" class="message">Import Store</a></li>
+         {#<li class=""><a href="#" active="importstores" class="message">Import Store</a></li>#}
      </ul>
 <div id="storeslist"  class="navshow navhide">
     <div class="row">
@@ -98,15 +98,15 @@
   </div>
 </div>
 
-<div id="importstores" class="navhide">
-    <button type="button" class="btn btn-primary pull-right" id="importstoressubmit">
-    Submit
-    </button>
-    <div class="form-group">
-        <label>Store Excel:</label>
-        <input type="file" name="importstores" class="importstores">
-    </div>
-</div>
+{#<div id="importstores" class="navhide">#}
+    {#<button type="button" class="btn btn-primary pull-right" id="importstoressubmit">#}
+    {#Submit#}
+    {#</button>#}
+    {#<div class="form-group">#}
+        {#<label>Store Excel:</label>#}
+        {#<input type="file" name="importstores" class="importstores">#}
+    {#</div>#}
+{#</div>#}
 
 <div id="editstores" class="navhide">
   <div class="panel panel-default">
