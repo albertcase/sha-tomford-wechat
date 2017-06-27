@@ -7,29 +7,28 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="format-detection" content="telephone=no">
-	<script type="text/javascript" src="/source/valention/js/jquery.js"></script>
-	<link rel="stylesheet" type="text/css" href="/source/valention/css/wx_shop.css">
+	<script type="text/javascript" src="/source/tomford/js/jquery.js"></script>
 	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=Z5FOXZbjH3AEIukiiRTtD7Xy"></script>
 <style type="text/css">
+*{
+	margin: 0;
+	padding: 0;
+}
+html,body{
+	height: 100%;
+}
 body {
+	background-color: #000;
+	font-family: "Heiti SC", sans-serif Arial;
+	font-size: 14px;
+	color: #fff;
+}
+a:link,a:active,a:hover,a:visited{
+	color: #fff;
 	text-decoration: none;
 }
-#marker {
-	position: relative;
-	top: 8px;
-	margin: 0px 10px 0px 0px;
-}
-#baidu-map {
-	margin: 0px 0px 2px 0px;
-}
-#reader {
-	margin: 0px 0px 2px 0px;
-}
-#click-tip {
-	font-size: 14px;
-	margin: 20px 0px 2px 0px;
-}
-.btn {
+
+a.btn {
 	display: inline-block;
 	padding: 4px 6px;
 	margin-bottom: 0;
@@ -61,125 +60,74 @@ body {
 	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px  rgba(0, 0, 0, 0.05);
 }
 #map-canvas {
-	height: 200px;
-	margin: 10px 0px 0px 0px;
+	height: 320px;
+	margin: -320px 0 0 0;
 }
-#map-canvas img {
-	max-width: none !important;
-}
-#media {
-	margin: 0px;
-	padding: 0px;
-}
-#foot {
-	margin: 0px 0px 0px 0px;
-	padding: 0px;
-	font-size: 14px;
-	color: #3e3e3e;
-	line-height: 1.5;
-}
+
 #nickname {
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	max-width: 90%;
 }
-ol, ul {
-	list-style-position: inside;
+
+.content{
+	width:100%;
+	min-height: 100%;
 }
-#activity-detail .page-content .text {
-	font-size: 14px;
+.page-content{
+	width: 100%;
+	text-align: center;
+	padding: 0 0 370px 0;
 }
-.tel {
-	margin: 5px 0px 5px 0px;
+.text{
+	width: 80%;
+	text-align: left;
+	display: inline-block;
 }
-.text {
-	margin: 0px 0px 5px 0px;
+.store-name{
+	font-size: 18px;
+	width: 100%;
+	margin: 0 0 12px 0;
+	display: inline-block;
 }
-a:link {
-	color: #607FA6;
-	text-decoration: none;
+.text p{
+	width: 100%;
+	display: inline-block;
 }
-a:visited {
-	color: #607FA6;
-	text-decoration: none;
+.store-logo{
+	width: 100%;
+	margin: 30px 0;
+	text-align: center;
 }
-a:hover {
-	color: #607FA6;
-	text-decoration: none;
-}
-a:active {
-	color: #607FA6;
-	text-decoration: none;
-}
-.tel a {
-	color: rgb(0, 128, 0);
-	font-size: 10.5pt;
-	font-family: 微软雅黑, sans-serif;
-}
+
 </style>
 <body id="activity-detail">
-	<div class="page-bizinfo">
-		<div class="header">
-			<h1 id="activity-name">{{ storename }}</h1>
-			<p class="activity-info">
-				<span id="post-date" class="activity-meta no-extra">2016年03月24日</span>
-				<span id="author" class="activity-meta">Valentino</span>
-				<a href="javascript:;" id="post-user" class="activity-meta"> <span class="text-ellipsis"></span> <i class="icon_link_arrow"></i> </a>
-			</p>
-		</div>
-	</div>
-	<div class="page-content" style="margin: 0px">
+
+<div class="content">
+	<div class="page-content">
 		<div class="text">
-			<p>
-{% if storelog is defined and storelog %}
-				<img src="{{ storelog }}">
-{% endif %}
-			</p>
-  			<div id="map-canvas"></div>
-  			<div id="edit">
-          <p></p>
-{% if brandtype is defined and brandtype %}
-          <p>产品类型：</p>
-          <p>{{ brandtype }}</p>
-          <p></p>
-{% endif %}
-{% if address is defined and address %}
-          <p>地址：</p>
-          <p>{{ address|raw }}</p>
-          <p></p>
-{% endif %}
-{% if openhours is defined and openhours %}
-          <p>营业时间：</p>
-          <p>{{ openhours|raw }}</p>
-          <p></p>
-{% endif %}
-{% if phone is defined and phone %}
-          <p>电话：</p>
-{% endif %}
-        </div>
-{% if phone is defined and phone %}
-				<div id="tel" class="tel">
-					<a href="tel:{{ phone }}">{{ phone }}</a>
-				</div>
-{% endif %}
-		<div id="click-tip">
-			<span>点击</span><a id="reader" class="btn" href="http://www.valentino.cn/cn">阅读原文</a> 登陆Valentino官网了解更多资讯
+			<div class="store-logo">
+				<img src="/source/tomford/image/storelog.png" width="60%">
+			</div>
+			<div class="store-name">{{ storename }}</div>
+            {% if address is defined and address %}
+                <p>{{ address|raw }}</p>
+
+            {% endif %}
+            {% if phone is defined and phone %}
+                <p><a class="tel" href="tel:{{ phone }}">{{ phone }}</a></p>
+            {% endif %}
+			<input type="hidden" id="x" value="{{ lat }}">
+			<input type="hidden" id="y" value="{{ lng }}">
+			<input type="hidden" id="mapTitle" value="">
+			<input type="hidden" id="mapContent" value="">
 		</div>
-		<div id="signUrlDivContainer" class="text">
-   			 <p>
-    			<img id="signUrlpic" name="signUrlpic" src="/source/valention/image/1dc8b378-e65a-4931-bd81-1ec40cf0283c.jpg">
-   			 </p>
-  		</div>
-		<div id="foot">
-			<p></p>
-		</div>
-		<input type="hidden" id="x" value="{{ lat }}">
-		<input type="hidden" id="y" value="{{ lng }}">
-		<input type="hidden" id="mapTitle" value="">
-		<input type="hidden" id="mapContent" value="">
 	</div>
-	<!-- <script id="txt-title" type="txt/text">Valentino北京王府井in88精品店</script> -->
+</div>
+{% if country is defined and country=="cn" %}
+	<div id="map-canvas"></div>
+{% endif %}
 	<script id="txt-sourceurl" type="txt/text"></script>
 	<script type="text/javascript">
 		function getUrlParam(name) {
@@ -190,7 +138,7 @@ a:active {
 			return null;
 		}
 		function generateBaiduMap() {
-			$("#map-canvas").after('<p><a id="baidu-map" class="btn"></a>仅限中国大陆地区</p>');
+			//$("#map-canvas").after('<p><a id="baidu-map" class="btn"></a>仅限中国大陆地区</p>');
 			var _ori_x = getUrlParam('orix');
 			var _ori_y = getUrlParam('oriy');
 			var _x = $('#x').val();
@@ -198,7 +146,7 @@ a:active {
 			$("#baidu-map").attr('href','http://api.map.baidu.com/direction?origin=latlng:'+_ori_x+','+_ori_y+'|name:起点&destination=latlng:'+_x+','+_y+'|name:终点&mode=driving&region=1&output=html&src=yourCompanyName|yourAppName').html('到这里去');
 		}
 		function generateBaiduMapForShop() {
-			$("#map-canvas").after('<p><img id="marker" src="/images/maps_marker.png"/><a id="baidu-map" class="btn"></a>仅限中国大陆地区</p>');
+			//$("#map-canvas").after('<p style="width: 100%; padding: 15px 0; display: inline-block;"><a id="baidu-map" class="btn" style="margin: 0 9px 0 0;"></a>仅限中国大陆地区</p>');
 			var _ori_x = getUrlParam('orix');
 			var _ori_y = getUrlParam('oriy');
 			var _x = $('#x').val();

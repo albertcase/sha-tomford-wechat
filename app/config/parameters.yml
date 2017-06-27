@@ -19,9 +19,9 @@ parameters:
     redis_prostr: tomford
 
     # wechat config
-    wechat_token: same_wechat_samesamechina
-    wechat_appid: wx6a8d97667dd72747
-    wechat_appsecret: 3712922926656c44c6d00a5ef264308c
+    wechat_token:
+    wechat_appid:
+    wechat_appsecret:
 
     bundles:
       - wechat_api
