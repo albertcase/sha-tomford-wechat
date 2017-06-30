@@ -308,11 +308,11 @@ class WechatResponse{
       for($i=0;$i<count($rs);$i++){
         $meter = $this->getDistance($lat,$lng,$rs[$i]['lat'],$rs[$i]['lng']);
         $meters = "(距离约" . $meter ."米)";
-        $pisurl = 'source/change/store/'.$rs[$i]['id'].'.jpg';
+        $pisurl = $rs[$i]['storelog'] ? $rs[$i]['storelog'] : $this->container->get('request_stack')->getCurrentRequest()->getSchemeAndHttpHost().'/source/change/store/default.jpg';
         $datas[$meter] = array(
           'Title' => $rs[$i]['storename'].$meters,
           'Description' => $rs[$i]['storename'],
-          'PicUrl' => $this->container->get('request_stack')->getCurrentRequest()->getSchemeAndHttpHost().'/'.$pisurl,
+          'PicUrl' => $pisurl,
           'Url' => $this->container->get('request_stack')->getCurrentRequest()->getSchemeAndHttpHost().'/wechat/store/'.$rs[$i]['id'].'?orix='.$lat.'&oriy='.$lng,
         );
       }
