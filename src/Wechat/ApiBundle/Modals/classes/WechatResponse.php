@@ -289,14 +289,13 @@ class WechatResponse{
   public function feedbackStores($l_x, $l_y){
     $baidu = file_get_contents("http://api.map.baidu.com/geoconv/v1/?coords={$l_x},{$l_y}&from=3&to=5&ak=Z5FOXZbjH3AEIukiiRTtD7Xy");
     $baidu = json_decode($baidu, true);
-    $lat = $baidu['result'][0]['x'];
-    $lng = $baidu['result'][0]['y'];
-    $squares = $this->returnSquarePoint($lng,$lat,100000);
-    $latbig = $squares['right-bottom']['lat'] > $squares['left-top']['lat'] ? $squares['right-bottom']['lat'] : $squares['left-top']['lat'];
-    $latsmall = $squares['right-bottom']['lat'] > $squares['left-top']['lat'] ? $squares['left-top']['lat'] : $squares['right-bottom']['lat'];
-    $lngbig = $squares['left-top']['lng'] > $squares['right-bottom']['lng'] ? $squares['left-top']['lng'] : $squares['right-bottom']['lng'];
-    $lngsmall = $squares['left-top']['lng'] > $squares['right-bottom']['lng'] ? $squares['right-bottom']['lng'] : $squares['left-top']['lng'];
-    $info_sql = "select * from `stores` where lat<>0 and (lat between {$latsmall} and {$latbig}) and (lng between {$lngsmall} and {$lngbig})";
+    $lat = addslashes($baidu['result'][0]['x']);
+    $lng = addslashes($baidu['result'][0]['y']);
+
+    $maxDistance = 50;
+    $limitSum = 8;
+
+    $info_sql = "SELECT `storelog`, `storename`, `id`, `lat`, `lng`, SQRT(POW(69.1 * (`lat` - {$lat}), 2) + POW(69.1 * ({$lng} - `lng`) * COS(lat / 57.3), 2)) AS distance FROM stores HAVING distance < {$maxDistance} ORDER BY distance Limit {$limitSum}";
     $dataSql = $this->container->get('my.dataSql');
     $rs = $dataSql->querysql($info_sql);
     if(!$rs){
@@ -306,8 +305,12 @@ class WechatResponse{
     $fs = new \Symfony\Component\Filesystem\Filesystem();
     $data = array();
       for($i=0;$i<count($rs);$i++){
-        $meter = $this->getDistance($lat,$lng,$rs[$i]['lat'],$rs[$i]['lng']);
-        $meters = "(距离约" . $meter ."米)";
+          $rs[$i]['distance'] = round($rs[$i]['distance'], 2);
+        if($rs[$i]['distance'] < 1) {
+            $meters = "(距离约" . $rs[$i]['distance'] * 1000 ."米)";
+        } else {
+            $meters = "(距离约" . $rs[$i]['distance'] ."千米)";
+        }
         $pisurl = $rs[$i]['storelog'] ? $rs[$i]['storelog'] : $this->container->get('request_stack')->getCurrentRequest()->getSchemeAndHttpHost().'/source/change/store/default.jpg';
         $datas[$i] = array(
           'Title' => $rs[$i]['storename'].$meters,
