@@ -319,7 +319,7 @@ class WechatResponse{
             $pisurl = $rs[$i]['storelog'] ? $rs[$i]['storelog'] : $this->container->get('request_stack')->getCurrentRequest()->getSchemeAndHttpHost().'/source/change/store/default2.jpg';
         }
         
-        $pisurl = $rs[$i]['storelog'] ? $rs[$i]['storelog'] : $this->container->get('request_stack')->getCurrentRequest()->getSchemeAndHttpHost().'/source/change/store/default.jpg';
+//        $pisurl = $rs[$i]['storelog'] ? $rs[$i]['storelog'] : $this->container->get('request_stack')->getCurrentRequest()->getSchemeAndHttpHost().'/source/change/store/default.jpg';
         $datas[$i] = array(
           'Title' => $rs[$i]['storename'].$meters,
           'Description' => $rs[$i]['storename'],
