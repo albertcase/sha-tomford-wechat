@@ -311,6 +311,14 @@ class WechatResponse{
         } else {
             $meters = "(距离约" . $rs[$i]['distance'] ."千米)";
         }
+        
+        //如果是图文第一个显示大图片
+        if($i == 0) {
+            $pisurl = $rs[$i]['storelog'] ? $rs[$i]['storelog'] : $this->container->get('request_stack')->getCurrentRequest()->getSchemeAndHttpHost().'/source/change/store/default.jpg';
+        } else {
+            $pisurl = $rs[$i]['storelog'] ? $rs[$i]['storelog'] : $this->container->get('request_stack')->getCurrentRequest()->getSchemeAndHttpHost().'/source/change/store/default2.jpg';
+        }
+        
         $pisurl = $rs[$i]['storelog'] ? $rs[$i]['storelog'] : $this->container->get('request_stack')->getCurrentRequest()->getSchemeAndHttpHost().'/source/change/store/default.jpg';
         $datas[$i] = array(
           'Title' => $rs[$i]['storename'].$meters,
