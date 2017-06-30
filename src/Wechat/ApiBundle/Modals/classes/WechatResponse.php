@@ -309,7 +309,7 @@ class WechatResponse{
         $meter = $this->getDistance($lat,$lng,$rs[$i]['lat'],$rs[$i]['lng']);
         $meters = "(距离约" . $meter ."米)";
         $pisurl = $rs[$i]['storelog'] ? $rs[$i]['storelog'] : $this->container->get('request_stack')->getCurrentRequest()->getSchemeAndHttpHost().'/source/change/store/default.jpg';
-        $datas[$meter] = array(
+        $datas[$i] = array(
           'Title' => $rs[$i]['storename'].$meters,
           'Description' => $rs[$i]['storename'],
           'PicUrl' => $pisurl,
