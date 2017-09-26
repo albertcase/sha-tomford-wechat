@@ -69,11 +69,10 @@ class JssdkController extends Controller
       return $respose->setContent("this jssdk not exists")->send();
     $respose->headers->set('Content-Type', 'application/javascript');
     $wechat = $this->container->get('my.Wechat');
-    if(isset($_SERVER['HTTP_REFERER'])){
-      $url = $_SERVER['HTTP_REFERER'];
-    }else{
-      $url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-    }
+
+    if(!$url = $this->getRequest()->get('referer'))
+      $url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
+    
     $jssdk = $wechat->getJsSDK($url);
     $jscode = array(
       'debug' => (isset($_GET['debug']) && $_GET['debug'])?true:false,

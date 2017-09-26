@@ -174,13 +174,13 @@ wechat_qrcode_papi_delete:
     defaults: { _controller: WechatApiBundle:Qrcode:delete }
 # qrcode end
 # oauth start
-wechat_oauth_api_oauth2:
-    path:     /wechat/oauth/oauth2
-    defaults: { _controller: WechatApiBundle:Oauth:oauth2 }
-
-wechat_oauth_api_vendor:
+wechat_oauth_api:
     path:     /v1/wx/web/oauth2/authorize
-    defaults: { _controller: WechatApiBundle:Oauth:vendor }
+    defaults: { _controller: WechatApiBundle:Oauth:authorizeApi }
+
+wechat_callback_api:
+    path:     /v1/wx/web/oauth2/callbak
+    defaults: { _controller: WechatApiBundle:Oauth:authorizeCallback }
 
 wechat_oauth_papi_add:
     path:     /wechat/oauth/add
