@@ -294,3 +294,32 @@ wechat_retrieve_access_token:
 wechat_retrieve_test:
     path:     /wechat/retrieve/test
     defaults: { _controller: WechatApiBundle:Api:testRetrieve }
+
+# 模版消息接口
+wechat_message_template:
+    path:     /v2/wx/template/send
+    defaults: { _controller: WechatApiBundle:Api:tmpMsg }
+
+wechat_message_template_res:
+    path:     /v2/wx/template/result
+    defaults: { _controller: WechatApiBundle:Api:tmpMsgRes }
+
+# 二维码接口
+wechat_api_qrcode:
+    path:     /api/v1/qrcode/{id}/wechat
+    defaults: { _controller: WechatApiBundle:Api:qrcode }
+
+anke_test:
+    path:     /anketest
+    defaults: { _controller: WechatApiBundle:Api:anketest }
+
+# 验证用户是否已经关注
+api_user_follow:
+    path:     /api/v1/follow
+    defaults: { _controller: WechatApiBundle:Api:follow }
+
+api_check_access_token:
+    path:     /checktoken
+    defaults: { _controller: WechatApiBundle:Api:checkAccessToken }
+
+

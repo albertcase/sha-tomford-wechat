@@ -15,6 +15,60 @@ class dataSql{
     return clone $this->_db;
   }
 
+  # 保存日志
+  public function saveLog($data)
+  {
+    return $this->insertData($data, 'wechat_log');
+  }
+
+  public function tmplateLoad($uid, $tid) {
+    $rs = $this->searchData(array('uid' => $uid, 'tmpid' => $tid) , array('id'), 'wechat_api_usertids');
+    if(empty($rs)) {
+        return FALSE;
+    } else {
+        return $rs[0]['id'];
+    }
+  }
+
+  # 保存模版消息
+  public function saveTmpMsg($data) {
+    return $this->insertData($data, 'wechat_api_templates');
+  }
+
+  # 修改模版消息状态
+  public function updateTmpMsg($data, $msgid) {
+    $wechat_msgid = isset($data['wechat_msgid']) ? $data['wechat_msgid'] : '';
+    $msg_status = isset($data['msg_status']) ? $data['msg_status'] : 0;
+    $wechat_msg_status = isset($data['wechat_msg_status']) ? $data['wechat_msg_status'] : 0;
+    $wechat_msg_errcode = isset($data['wechat_msg_errcode']) ? $data['wechat_msg_errcode'] : '';
+    $wechat_msg_errmsg = isset($data['wechat_msg_errmsg']) ? $data['wechat_msg_errmsg'] : '';
+    $sql = "UPDATE `wechat_api_templates` SET `wechat_msgid` = '" . $wechat_msgid . "', `msg_status` = '" . $msg_status . "', `wechat_msg_status` = '" . $wechat_msg_status . "', `wechat_msg_errcode` = '" . $wechat_msg_errcode  . "', `wechat_msg_errmsg` = '" . $wechat_msg_errmsg . "'  WHERE `msgid` = '" . $msgid . "'";
+    return $this->querysql($sql);
+  }
+
+  # 保存系统API原始数据
+  public function insertApiLog($data) {
+    return $this->insertData($data, 'wechat_api_logs');
+  }
+
+  public function checkTmplateId($tid) {
+    $rs = $this->searchData(array('tmpid' => $tid) , array('id'), 'wechat_api_tmpids');
+    if(empty($rs)) {
+        return FALSE;
+    } else {
+        return $rs[0]['id'];
+    }
+  }
+
+  # 验证是否合法的API访问者
+  public function checkApiUser($accessToken) {
+      $rs = $this->searchData(array('access_token' => $accessToken) , array('id'), 'wechat_api_account');
+      if(empty($rs)) {
+          return FALSE;
+      } else {
+          return $rs[0]['id'];
+      }
+  }
   public function syncMaterial($data){
     if(!is_array($data) || !isset($data[0]))
       return false;
