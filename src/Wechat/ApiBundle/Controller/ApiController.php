@@ -139,9 +139,9 @@ class ApiController extends Controller
 
         # 验证用户是否关注
         $subscribe = $this->checkSubscribe($wechatAccessToken, $apiData['touser']);
-        // if(!$subscribe) {
-        //     return new JsonResponse(array("code"=>100, "msg"=>"the user is not follower"));
-        // }
+        if(!$subscribe) {
+            return new JsonResponse(array("code"=>100, "msg"=>"the user is not follower"));
+        }
 
         # 验证模版ID
         $apiTmpId = $this->checkTmplateId($myDb, $apiData['template_id']);

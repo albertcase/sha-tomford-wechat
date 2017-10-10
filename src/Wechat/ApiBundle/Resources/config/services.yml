@@ -223,3 +223,8 @@ services:
 # script
         script.customs:
           class: Wechat\ApiBundle\Modals\CustomMsg\customsResponse
+
+# check_domain
+        check.domain:
+            class: Wechat\ApiBundle\Modals\classes\checkDomain
+            arguments: [%domain.list%]

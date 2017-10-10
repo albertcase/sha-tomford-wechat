@@ -23,6 +23,10 @@ parameters:
     wechat_appid:
     wechat_appsecret:
 
+    domain.list:
+      tomford_lipsboys: 127.0.0.1:9122
+      anketest: www.test.com
+
     bundles:
       - wechat_api
       - article

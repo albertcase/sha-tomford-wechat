@@ -43,7 +43,7 @@ class OauthController extends Controller
 
       # 没有回调地址报错
       if(!$callback_url) {
-        return new Response('param redirect_ur not exists');
+        return new Response('param redirect_uri not exists');
       }
       # checkdomain
       $checkdomainSevice = $this->get('check.domain');
